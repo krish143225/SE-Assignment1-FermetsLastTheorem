@@ -8,8 +8,8 @@ This Java program helps users search for "near misses" of Fermat's Last Theorem,
 
 Step 1
 Clone the repository to your local machine using the following command: 
-https://github.com/krish143225/SE-Assignment1-FermetsLastTheorem.git
 
+https://github.com/krish143225/SE-ass1.git
 
 Step 2
 Compile the Java program: javac F fermatsmain.java
