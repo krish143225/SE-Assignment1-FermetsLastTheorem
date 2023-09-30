@@ -15,7 +15,7 @@ Step 2
 Compile the Java program: javac FermatsTheorem.java
 
 Step 3
-Run the program: java  fermatsmain.java
+Run the program: java  FermatsTheorem.java
 
 Step 4
 Follow the on-screen instructions to input values for `n` and `k`.
