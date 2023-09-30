@@ -1,96 +1,58 @@
 package Fermats;
-
 import java.util.Scanner;
 
 public class FermatsTheorem {
 
-    static int k, n; // Initialize unknown variables
-    static int kUpperLimit = 50; // Set the upper limit for variable K
+    // Calculate the relative miss
+    public static double calculateMiss(int x, int y, int z, int n) {
+        double result = Math.pow(x, n) + Math.pow(y, n);
+        double zToN = Math.pow(z, n);
 
-    static float smallestRelativeMiss = Float.MAX_VALUE; // Initialize the smallest relative miss
+        double miss = Math.abs(result - zToN);
+        double relativeMiss = miss / result;
+        return relativeMiss;
+    }
 
     public static void main(String[] args) {
+        // Print welcome message
+        System.out.println("\nFermat's Last Theorem \n");
+
+        // Get input from user
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Fermat's Last Theorem Near Misses Finder");
-
-        // Get user input for n
-        System.out.print("Enter the value of n (value should be greater than 2 and less than 12): ");
-        n = getInputInRange(scanner, 3, 11);
-
-        // Get user input for k
-        System.out.print("Enter the value of k (value should be greater than 10 and less than " + kUpperLimit + "): ");
-        k = getInputInRange(scanner, 11, kUpperLimit);
-
+        System.out.print("Enter the value of n should be greater than 2 and less than 12: ");
+        int n = scanner.nextInt();
+        System.out.print("\nEnter the value of k should be greater than 10: ");
+        int k = scanner.nextInt();
         scanner.close();
 
-        findNearMisses();
-    }
+        double minimumRelativeMissValues = Double.POSITIVE_INFINITY;
+        int minX = 0, minY = 0;
 
-    // Utility method to get user input within a specified range
-    static int getInputInRange(Scanner scanner, int minVal, int maxVal) {
-        int inputValue;
-        do {
-            inputValue = scanner.nextInt();
-            if (inputValue < minVal || inputValue > maxVal) {
-                System.out.print("Invalid value. Please enter a value between " + minVal + " and " + maxVal + ": ");
-            }
-        } while (inputValue < minVal || inputValue > maxVal);
-        return inputValue;
-    }
+        // Check if input values are valid or not
+        if (n > 2 && n < 12 && k > 10) {
+            for (int x = 10; x <= k; x++) {
+                for (int y = 10; y <= k; y++) {
+                    for (int z = 1; z <= k; z++) {
+                        if (x != y) {
+                            double relativeMiss = calculateMiss(x, y, z, n);
 
-    static void findNearMisses() {
-        for (int x = 10; x <= k; x++) {
-            for (int y = x; y <= k; y++) {
-                float closeVal = Float.MAX_VALUE;
-                int z = (x + y) / 2;
-
-                if (z > k) {
-                    z = k;
-                    printResultValues(x, y, z, findRelativeMiss(x, y, z));
-                    continue;
+                            if (relativeMiss < minimumRelativeMissValues) {
+                                minimumRelativeMissValues = relativeMiss;
+                                minX = x;
+                                minY = y;
+                            }
+                        }
+                    }
                 }
-
-                while (z <= k) {
-                    float near = findRelativeMiss(x, y, z);
-                    if (near > closeVal)
-                        break;
-
-                    closeVal = near;
-                    z++;
-                }
-                z--;
-
-                printResultValues(x, y, z, closeVal);
-                if (x != y)
-                    printResultValues(y, x, z, closeVal);
             }
+
+            // Print result
+            System.out.println("\nRelative miss:");
+            System.out.println("x = " + minX + ", y = " + minY);
+            System.out.printf("Relative diff = %.7f%n", minimumRelativeMissValues);
+        } else {
+            // Print invalid input
+            System.out.println("Invalid input. Please make sure n value should be greater than 2 and less than 12, and k greater than 10");
         }
-
-        // Print the smallest relative miss at the end
-        System.out.println("\nSmallest Relative Miss: " + smallestRelativeMiss);
-    }
-
-    static void printResultValues(int x, int y, int z, float closeVal) {
-        float relMiss = closeVal;
-
-        if (smallestRelativeMiss > relMiss) {
-            smallestRelativeMiss = relMiss;
-            System.out.println("\nNew Smallest Relative Miss:");
-            System.out.println("x: " + x + ", y: " + y + ", z: " + z);
-            System.out.println("Relative Miss (Percentage): " + (relMiss * 100) + "%");
-            System.out.println("Actual Miss: " + findActualMiss(x, y, z));
-        }
-    }
-
-    public static float findRelativeMiss(int x, int y, int z) {
-        double zVal = Math.pow(z, n);
-        double xyVal = Math.pow(x, n) + Math.pow(y, n);
-        return (float) Math.abs(1.0 - xyVal / zVal);
-    }
-
-    public static long findActualMiss(int x, int y, int z) {
-        double zVal = Math.pow(z, n);
-        double xyVal = Math.pow(x, n) + Math.pow(y, n);
-        return (long) (xyVal - zVal);
     }
 }
