@@ -13,7 +13,7 @@ public class FermatsTheorem {
         return relativeMiss;
     }
 
-    public static void process() {
+    public static void main(String args[]) {
         // Print welcome message
         System.out.println("\nFermat's Last Theorem \n");
 
