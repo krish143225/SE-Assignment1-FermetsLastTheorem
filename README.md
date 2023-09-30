@@ -12,7 +12,7 @@ Clone the repository to your local machine using the following command:
 https://github.com/krish143225/SE-Assignment1-FermetsLastTheorem.git
 
 Step 2
-Compile the Java program: javac F fermatsmain.java
+Compile the Java program: javac fermatsmain.java
 
 Step 3
 Run the program: java  fermatsmain.java
