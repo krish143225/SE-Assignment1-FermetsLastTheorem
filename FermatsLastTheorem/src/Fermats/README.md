@@ -13,6 +13,7 @@ https://github.com/krish143225/SE-Assignment1-FermetsLastTheorem.git
 
 Step 2
 Compile the Java program: javac FermatsTheorem.java
+
 Step 3
 Run the program: java FermatsTheorem.java
 
