@@ -7,9 +7,7 @@ This Java program helps users search for "near misses" of Fermat's Last Theorem,
 ## Usage
 
 Step 1
-Clone the repository to your local machine using the following command: 
-
-https://github.com/krish143225/SE-Assignment1-FermetsLastTheorem.git
+Clone the repository to your local machine using the following command: git clone https://github.com/krish143225/SE-Assignment1-FermetsLastTheorem.git
 
 Step 2
 Compile the Java program: javac FermatsTheorem.java
